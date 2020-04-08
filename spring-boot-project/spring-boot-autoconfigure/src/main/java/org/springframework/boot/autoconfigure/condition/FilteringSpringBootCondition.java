@@ -110,6 +110,9 @@ abstract class FilteringSpringBootCondition extends SpringBootCondition
 		return Class.forName(className);
 	}
 
+	/**
+	 * 根据类名过滤存在或者不存在
+	 */
 	protected enum ClassNameFilter {
 
 		PRESENT {

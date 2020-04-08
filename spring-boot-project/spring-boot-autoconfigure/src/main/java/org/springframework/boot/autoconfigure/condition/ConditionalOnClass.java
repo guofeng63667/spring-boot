@@ -25,6 +25,9 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Conditional;
 
 /**
+ *
+ * 通过指定value的类数组，当这些类存在时，则可被生效创建
+ * <br/>------------------------------------------<br/>
  * {@link Conditional @Conditional} that only matches when the specified classes are on
  * the classpath.
  * <p>
