@@ -17,6 +17,8 @@
 package org.springframework.boot.diagnostics;
 
 /**
+ * 失败诊断结果
+ * <br/>------------------------------------------<br/>
  * The result of analyzing a failure.
  *
  * @author Andy Wilkinson

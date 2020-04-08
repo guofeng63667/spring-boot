@@ -17,6 +17,8 @@
 package org.springframework.boot.diagnostics;
 
 /**
+ * 启动失败分析结果报告器
+ * <br/>------------------------------------------<br/>
  * Reports a {@code FailureAnalysis} to the user.
  *
  * @author Andy Wilkinson

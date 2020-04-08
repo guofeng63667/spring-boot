@@ -32,6 +32,8 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.util.ErrorHandler;
 
 /**
+ * 事件发布监听器，在spring.fatories中配置的ApplicationListener，会在此处通过{@link SimpleApplicationEventMulticaster}的multicastEvent方法
+ * 和ConfigurableApplicationContext的publishEvent进行事件调用
  * {@link SpringApplicationRunListener} to publish {@link SpringApplicationEvent}s.
  * <p>
  * Uses an internal {@link ApplicationEventMulticaster} for the events that are fired
@@ -49,8 +51,14 @@ public class EventPublishingRunListener implements SpringApplicationRunListener,
 
 	private final String[] args;
 
+	//多事件广播器,里面存放ApplicationListener列表
 	private final SimpleApplicationEventMulticaster initialMulticaster;
 
+	/**
+	 * 实例化时，将application中的所有listener注册到initialMulticaster中，在
+	 * @param application
+	 * @param args
+	 */
 	public EventPublishingRunListener(SpringApplication application, String[] args) {
 		this.application = application;
 		this.args = args;

@@ -26,6 +26,8 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 import org.springframework.util.Assert;
 
 /**
+ * 默认的保存命令行入参信息的类
+ * <br/>------------------------------------------<br/>
  * Default implementation of {@link ApplicationArguments}.
  *
  * @author Phillip Webb
@@ -33,8 +35,10 @@ import org.springframework.util.Assert;
  */
 public class DefaultApplicationArguments implements ApplicationArguments {
 
+	//保存解析后的参数信息对象
 	private final Source source;
 
+	//入参元数据
 	private final String[] args;
 
 	public DefaultApplicationArguments(String... args) {
@@ -70,6 +74,9 @@ public class DefaultApplicationArguments implements ApplicationArguments {
 		return this.source.getNonOptionArgs();
 	}
 
+	/**
+	 * 命令行入参信息保存
+	 */
 	private static class Source extends SimpleCommandLinePropertySource {
 
 		Source(String[] args) {

@@ -27,6 +27,8 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.util.ReflectionUtils;
 
 /**
+ * spring boot的监听器入口类
+ * <br/>------------------------------------------<br/>
  * A collection of {@link SpringApplicationRunListener}.
  *
  * @author Phillip Webb

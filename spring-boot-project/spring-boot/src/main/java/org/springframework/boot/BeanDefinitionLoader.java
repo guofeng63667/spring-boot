@@ -47,6 +47,9 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * BeanDefinition加载器，包含BeanDefinitionRegistry和source资源（可能包含xml或者java配置的类方式，boot中启动一般会被传入到这里），使用内部的
+ * AnnotatedBeanDefinitionReader，XmlBeanDefinitionReader等进行解析配置文件信息。
+ * <br/>------------------------------------------<br/>
  * Loads bean definitions from underlying sources, including XML and JavaConfig. Acts as a
  * simple facade over {@link AnnotatedBeanDefinitionReader},
  * {@link XmlBeanDefinitionReader} and {@link ClassPathBeanDefinitionScanner}. See
@@ -153,7 +156,9 @@ class BeanDefinitionLoader {
 			GroovyBeanDefinitionSource loader = BeanUtils.instantiateClass(source, GroovyBeanDefinitionSource.class);
 			load(loader);
 		}
+		//如果有被@Component进行注解，则将此类注册到annotatedReader中
 		if (isComponent(source)) {
+			//将source的beandefinition注册到beanFactory中
 			this.annotatedReader.register(source);
 			return 1;
 		}
@@ -273,6 +278,11 @@ class BeanDefinitionLoader {
 		return Package.getPackage(source.toString());
 	}
 
+	/**
+	 * 返回type类型是否有被{@link Component}进行注解
+	 * @param type
+	 * @return
+	 */
 	private boolean isComponent(Class<?> type) {
 		// This has to be a bit of a guess. The only way to be sure that this type is
 		// eligible is to make a bean definition out of it and try to instantiate it.

@@ -22,6 +22,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 /**
+ * 启动失败分析结果报告器，打印日志失败原因
+ * <br/>------------------------------------------<br/>
  * {@link FailureAnalysisReporter} that logs the failure analysis.
  *
  * @author Andy Wilkinson

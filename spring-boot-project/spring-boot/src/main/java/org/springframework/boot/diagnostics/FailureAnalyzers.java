@@ -36,6 +36,9 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
+ *
+ * 包含失败分析器的列表
+ * <br/>------------------------------------------<br/>
  * Utility to trigger {@link FailureAnalyzer} and {@link FailureAnalysisReporter}
  * instances loaded from {@code spring.factories}.
  * <p>
@@ -64,9 +67,15 @@ final class FailureAnalyzers implements SpringBootExceptionReporter {
 		Assert.notNull(context, "Context must not be null");
 		this.classLoader = (classLoader != null) ? classLoader : context.getClassLoader();
 		this.analyzers = loadFailureAnalyzers(this.classLoader);
+		//为失败分析器注入beanfactory和environment
 		prepareFailureAnalyzers(this.analyzers, context);
 	}
 
+	/**
+	 * 加载spring.factories中配置的失败分析器(key = {@link FailureAnalyzer})列表，并实例化返回列表
+	 * @param classLoader
+	 * @return
+	 */
 	private List<FailureAnalyzer> loadFailureAnalyzers(ClassLoader classLoader) {
 		List<String> analyzerNames = SpringFactoriesLoader.loadFactoryNames(FailureAnalyzer.class, classLoader);
 		List<FailureAnalyzer> analyzers = new ArrayList<>();
@@ -84,6 +93,11 @@ final class FailureAnalyzers implements SpringBootExceptionReporter {
 		return analyzers;
 	}
 
+	/**
+	 * 为失败分析器注入beanfactory和environment
+	 * @param analyzers
+	 * @param context
+	 */
 	private void prepareFailureAnalyzers(List<FailureAnalyzer> analyzers, ConfigurableApplicationContext context) {
 		for (FailureAnalyzer analyzer : analyzers) {
 			prepareAnalyzer(context, analyzer);
@@ -99,6 +113,12 @@ final class FailureAnalyzers implements SpringBootExceptionReporter {
 		}
 	}
 
+	/**
+	 * 报告启动失败异常
+	 * <br/>------------------------------------------<br/>
+	 * @param failure the source failure
+	 * @return
+	 */
 	@Override
 	public boolean reportException(Throwable failure) {
 		FailureAnalysis analysis = analyze(failure, this.analyzers);
