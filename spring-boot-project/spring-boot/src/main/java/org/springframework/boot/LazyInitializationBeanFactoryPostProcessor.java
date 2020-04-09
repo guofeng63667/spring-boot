@@ -27,6 +27,9 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.core.Ordered;
 
 /**
+ *
+ * 对工厂的post-processor，在对beanDefinition进行实例化之前，对工厂内部的bean查找符合懒加载条件的beanDefinition将其lazyInit设置为true
+ * <br/>------------------------------------------<br/>
  * {@link BeanFactoryPostProcessor} to set lazy-init on bean definitions that are not
  * {@link LazyInitializationExcludeFilter excluded} and have not already had a value
  * explicitly set.
@@ -43,6 +46,7 @@ public final class LazyInitializationBeanFactoryPostProcessor implements BeanFac
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		// Take care not to force the eager init of factory beans when getting filters
+		//获取工厂中属于LazyInitializationExcludeFilter类型的过滤器，遍历beanDefinition，依次为其设置是否需要进行懒加载flag
 		Collection<LazyInitializationExcludeFilter> filters = beanFactory
 				.getBeansOfType(LazyInitializationExcludeFilter.class, false, false).values();
 		for (String beanName : beanFactory.getBeanDefinitionNames()) {
@@ -61,6 +65,7 @@ public final class LazyInitializationBeanFactoryPostProcessor implements BeanFac
 			return;
 		}
 		Class<?> beanType = getBeanType(beanFactory, beanName);
+		//根据懒加载过滤器寻找符合懒加载条件的beanDefinition，将其lazyInit设置为true
 		if (!isExcluded(filters, beanName, beanDefinition, beanType)) {
 			beanDefinition.setLazyInit(true);
 		}

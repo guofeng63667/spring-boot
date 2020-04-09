@@ -130,8 +130,11 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 	 */
 	@Override
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+		//添加能够注入ServletContext的post-processor
 		beanFactory.addBeanPostProcessor(new WebApplicationContextServletContextAwareProcessor(this));
+		//忽略实现ServletContextAware接口的autowire的注入
 		beanFactory.ignoreDependencyInterface(ServletContextAware.class);
+		//向beanFactory注册不同的作用域类型Scope
 		registerWebApplicationScopes();
 	}
 
@@ -236,6 +239,9 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 		servletContext.setAttribute(ServletContextScope.class.getName(), appScope);
 	}
 
+	/**
+	 * 向beanfactory注册不同的web作用域类型
+	 */
 	private void registerWebApplicationScopes() {
 		ExistingWebApplicationScopes existingScopes = new ExistingWebApplicationScopes(getBeanFactory());
 		WebApplicationContextUtils.registerWebApplicationScopes(getBeanFactory());

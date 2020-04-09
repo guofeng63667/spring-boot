@@ -377,7 +377,7 @@ public class SpringApplication {
 		ConfigurableEnvironment environment = getOrCreateEnvironment();
 		configureEnvironment(environment, applicationArguments.getSourceArgs());
 		ConfigurationPropertySources.attach(environment);
-		//环境变量准备完毕，事件回调
+		//环境变量准备完毕，环境变量准备完成事件回调
 		listeners.environmentPrepared(environment);
 		//绑定环境变量和SpringApplication类
 		bindToSpringApplication(environment);
@@ -428,14 +428,13 @@ public class SpringApplication {
 		}
 		//开启懒加载，则添加LazyInitializationBeanFactoryPostProcessor，默认是关闭的
 		if (this.lazyInitialization) {
-			//todo 尚不理解BeanFactoryPostProcessor的作用，待补充
 			context.addBeanFactoryPostProcessor(new LazyInitializationBeanFactoryPostProcessor());
 		}
 		// Load the sources
 		//加载所有的资源文件（xml或者java配置）
 		Set<Object> sources = getAllSources();
 		Assert.notEmpty(sources, "Sources must not be empty");
-		//加载
+		//加载，将资源文件（可能为javaConfig，也可能为xml）通过正确的解析方式(Class文件或者Resource文件)解析成BeanDefinition注入到beanFactory中
 		load(context, sources.toArray(new Object[0]));
 		//资源文件加载完成调用
 		listeners.contextLoaded(context);

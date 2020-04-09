@@ -55,7 +55,7 @@ public class EventPublishingRunListener implements SpringApplicationRunListener,
 	private final SimpleApplicationEventMulticaster initialMulticaster;
 
 	/**
-	 * 实例化时，将application中的所有listener注册到initialMulticaster中，在
+	 * 实例化时，将application中的所有listener注册到initialMulticaster中
 	 * @param application
 	 * @param args
 	 */

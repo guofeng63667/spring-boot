@@ -47,6 +47,10 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
 /**
+ *
+ * war包启动方式，在servlet3.0中会调用onStartup方法传入ServletContext动态添加ContextLoaderListener
+ * <br/>------------------------------------------<br/>
+ *
  * An opinionated {@link WebApplicationInitializer} to run a {@link SpringApplication}
  * from a traditional WAR deployment. Binds {@link Servlet}, {@link Filter} and
  * {@link ServletContextInitializer} beans from the application context to the server.
@@ -104,6 +108,11 @@ public abstract class SpringBootServletInitializer implements WebApplicationInit
 		}
 	}
 
+	/**
+	 * 此处类似与通过jar包启动方式配置的new SpringApplication().run的方式
+	 * @param servletContext
+	 * @return
+	 */
 	protected WebApplicationContext createRootApplicationContext(ServletContext servletContext) {
 		SpringApplicationBuilder builder = createSpringApplicationBuilder();
 		builder.main(getClass());
