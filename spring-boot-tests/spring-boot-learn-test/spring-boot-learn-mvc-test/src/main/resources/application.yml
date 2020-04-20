@@ -2,3 +2,36 @@ server:
   port: 8600
   servlet:
     context-path: /boot
+  tomcat:
+    max-threads: 10
+    max-connections: 20
+
+spring:
+  aop:
+    proxy-target-class: false
+  datasource:
+    url: jdbc:mysql://39.107.57.200:3306/picooc_device?characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 1Q2w3e4r!@#$
+  boot:
+    admin:
+      client:
+        url: http://localhost:8700
+  mvc:
+    async:
+      request-timeout: 1500
+
+
+
+logging:
+  level:
+    org.springframework.web: TRACE
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.crazy.learn.model
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

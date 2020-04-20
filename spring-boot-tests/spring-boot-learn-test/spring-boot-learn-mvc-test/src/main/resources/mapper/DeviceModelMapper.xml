@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crazy.learn.mapper.DeviceModelMapper">
+  <resultMap id="BaseResultMap" type="com.crazy.learn.model.DeviceModel">
+    <!--@mbg.generated-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="device_type" jdbcType="INTEGER" property="deviceType" />
+    <result column="brand" jdbcType="INTEGER" property="brand" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="attend_mode" jdbcType="INTEGER" property="attendMode" />
+    <result column="remark_name" jdbcType="VARCHAR" property="remarkName" />
+    <result column="front_view_url" jdbcType="VARCHAR" property="frontViewUrl" />
+    <result column="front_five_view_url" jdbcType="VARCHAR" property="frontFiveViewUrl" />
+    <result column="match_balance_url" jdbcType="VARCHAR" property="matchBalanceUrl" />
+    <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, device_type, brand, `level`, attend_mode, remark_name, front_view_url, front_five_view_url, 
+    match_balance_url, download_url, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from device_model
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from device_model
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.crazy.learn.model.DeviceModel">
+    <!--@mbg.generated-->
+    insert into device_model (id, device_type, brand, 
+      `level`, attend_mode, remark_name, 
+      front_view_url, front_five_view_url, match_balance_url, 
+      download_url, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceType,jdbcType=INTEGER}, #{brand,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{attendMode,jdbcType=INTEGER}, #{remarkName,jdbcType=VARCHAR}, 
+      #{frontViewUrl,jdbcType=VARCHAR}, #{frontFiveViewUrl,jdbcType=VARCHAR}, #{matchBalanceUrl,jdbcType=VARCHAR}, 
+      #{downloadUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.crazy.learn.model.DeviceModel">
+    <!--@mbg.generated-->
+    insert into device_model
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="attendMode != null">
+        attend_mode,
+      </if>
+      <if test="remarkName != null">
+        remark_name,
+      </if>
+      <if test="frontViewUrl != null">
+        front_view_url,
+      </if>
+      <if test="frontFiveViewUrl != null">
+        front_five_view_url,
+      </if>
+      <if test="matchBalanceUrl != null">
+        match_balance_url,
+      </if>
+      <if test="downloadUrl != null">
+        download_url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="attendMode != null">
+        #{attendMode,jdbcType=INTEGER},
+      </if>
+      <if test="remarkName != null">
+        #{remarkName,jdbcType=VARCHAR},
+      </if>
+      <if test="frontViewUrl != null">
+        #{frontViewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="frontFiveViewUrl != null">
+        #{frontFiveViewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="matchBalanceUrl != null">
+        #{matchBalanceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null">
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.crazy.learn.model.DeviceModel">
+    <!--@mbg.generated-->
+    update device_model
+    <set>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=INTEGER},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="attendMode != null">
+        attend_mode = #{attendMode,jdbcType=INTEGER},
+      </if>
+      <if test="remarkName != null">
+        remark_name = #{remarkName,jdbcType=VARCHAR},
+      </if>
+      <if test="frontViewUrl != null">
+        front_view_url = #{frontViewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="frontFiveViewUrl != null">
+        front_five_view_url = #{frontFiveViewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="matchBalanceUrl != null">
+        match_balance_url = #{matchBalanceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null">
+        download_url = #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.crazy.learn.model.DeviceModel">
+    <!--@mbg.generated-->
+    update device_model
+    set device_type = #{deviceType,jdbcType=INTEGER},
+      brand = #{brand,jdbcType=INTEGER},
+      `level` = #{level,jdbcType=INTEGER},
+      attend_mode = #{attendMode,jdbcType=INTEGER},
+      remark_name = #{remarkName,jdbcType=VARCHAR},
+      front_view_url = #{frontViewUrl,jdbcType=VARCHAR},
+      front_five_view_url = #{frontFiveViewUrl,jdbcType=VARCHAR},
+      match_balance_url = #{matchBalanceUrl,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
